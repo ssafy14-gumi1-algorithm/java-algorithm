@@ -41,7 +41,7 @@ week1/
 쉬운 난이도는 배열을 이용해 구현하는 문제가 나오고, 조금 더 난이도를 높이면 dx, dy를 이용하는 문제가 나오는 것 같다.\
 dx, dy를 이용하는 문제는 문제에서 상하좌우 혹은 인접한 칸(8방향)을 탐색하라고 나온다. dfs, bfs와 자주 연계됨.
 ## dx, dy 문제
-<img width="927" height="415" alt="image" src="https://github.com/user-attachments/assets/8241c522-2855-4050-a60b-27bc47042d50" />
+<img width="920" height="394" alt="image" src="https://github.com/user-attachments/assets/eeb16a65-8843-4faa-befa-273b40da1aa3" />
 
 탐색할 때는 아래와 같은 형식으로 코드가 작성됨 final로 한 이유 -> dx, dy는 내용물이 바뀌면 안 돼서
 ``` java
