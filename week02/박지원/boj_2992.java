@@ -32,11 +32,7 @@ public class boj_2992 {
     public static void perm(int cnt) {
         // 종료 조건
         if (cnt == len) {
-            StringBuilder sb = new StringBuilder();
-            for (char number : numbers) {
-                sb.append(number);
-            }
-            int permNum = Integer.parseInt(String.valueOf(sb));
+            int permNum = Integer.parseInt(String.valueOf(numbers));
 
             if (permNum > Integer.parseInt(x)) {
                 minNum = Math.min(minNum, permNum);
