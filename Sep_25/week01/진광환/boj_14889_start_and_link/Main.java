@@ -47,18 +47,52 @@ public class Main {
 
             }
         }
-        System.out.println(solve());
-    }
-
-    static int solve() {
-
 
         recur(0);
+        System.out.println(result);
+    }
 
 
+    static void recur(int idx) {
+        // path배열을 활용해 조합인척 하는 순열 만들기
+        // '조합'인척의 핵심 부분 : 가지치기
+        // 숫자를 고르는 문제이다 -> 같은 원소에 순서가 다른 경우는 오름차순만 남겨두자 그러면 조합이랑 똑같음
+        if (idx >= 2 && path[idx-1] <= path[idx-2]) {
+            return;
+        }
 
 
-        return result;
+        // 한쪽 팀을 다 골랐을 때
+        if (idx == R) {
+
+            // 다른 쪽 팀을 path배열의 R~N위치에 마저 채워넣기
+            int index = R;
+            for (int i = 1; i <= N; i++){
+
+                // path에 앞쪽부분에 없는 애들을 path뒤쪽에 채워넣기
+                if (!includes(i)){
+                    path[index] = i;
+                    index++;
+                }
+            }
+
+            // 완성된 배열로 점수의 최솟값 계산하기
+            result = Math.min(calculate(path), result);
+
+
+            // 계산이 완료된 배열에서 다른 쪽 팀의 점수 없애기
+            for (int i = R; i < N; i ++){
+                path[i] = -1;
+            }
+            return;
+        }
+
+        // 일반적인 순열 코드
+        for (int i = 1; i <= N; i++) {
+            path[idx] = i;
+            recur(idx + 1);
+            path[idx] = -1;
+        }
     }
 
     static boolean includes(int target) {
@@ -69,40 +103,6 @@ public class Main {
         return false;
     }
 
-    static void recur(int idx) {
-
-        if (idx >= 2 && path[idx-1] <= path[idx-2]) {
-
-
-            return;
-        }
-
-        if (idx == R) {
-            int index = R;
-            for (int i = 1; i <= N; i++){
-                if (!includes(i)){
-                    path[index] = i;
-                    index++;
-                }
-            }
-//            System.out.println(Arrays.toString(path));
-
-            result = Math.min(calculate(path), result);
-
-            for (int i = R; i < N; i ++){
-                path[i] = -1;
-            }
-
-            return;
-        }
-
-
-        for (int i = 1; i <= N; i++) {
-            path[idx] = i;
-            recur(idx + 1);
-            path[idx] = -1;
-        }
-    }
 
     static int calculate(int[] targetArray){
 
