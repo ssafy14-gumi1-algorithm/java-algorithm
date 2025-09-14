@@ -1,0 +1,86 @@
+// 퇴사
+
+// 백준이는 퇴사를 하려고 한다.
+// 오늘부터 N+1일째 되는 날 퇴사를 하기 위해서, 남은 N일 동안 최대한 많은 상담을 하려고 한다.
+// 백준이는 비서에게 최대한 많은 상담을 잡으라고 부탁을 했고, 비서는 하루에 하나씩 서로 다른 사람의 상담을 잡아놓았다.
+// 각각의 상담은 상담을 완료하는데 걸리는 기간 Ti와 상담을 했을 때 받을 수 있는 금액 Pi로 이루어져 있다.
+
+// 상담을 하는데 필요한 기간은 1일보다 클 수 있기 때문에, 모든 상담을 할 수는 없다.
+// 예를 들어서 1일에 상담을 하게 되면, 2일, 3일에 있는 상담은 할 수 없게 된다.
+// 2일에 있는 상담을 하게 되면, 3, 4, 5, 6일에 잡혀있는 상담은 할 수 없다.
+// 또한, N+1일째에는 회사에 없기 때문에, 6, 7일에 있는 상담을 할 수 없다.
+
+// 퇴사 전에 할 수 있는 상담의 최대 이익은 1일, 4일, 5일에 있는 상담을 하는 것이며, 이때의 이익은 10+20+15=45이다.
+// 상담을 적절히 했을 때, 백준이가 얻을 수 있는 최대 수익을 구하는 프로그램을 작성하시오.
+
+// [입력]
+// 첫째 줄에 N (1 ≤ N ≤ 15)이 주어진다.
+// 둘째 줄부터 N개의 줄에 Ti와 Pi가 공백으로 구분되어서 주어지며, 1일부터 N일까지 순서대로 주어진다. (1 ≤ Ti ≤ 5, 1 ≤ Pi ≤ 1,000)
+
+// [출력]
+// 첫째 줄에 백준이가 얻을 수 있는 최대 이익을 출력한다.
+
+// [문제 풀이]
+// 일을 한다, 안한다로 상태변환 트리 만드니깐 일을 하고있냐에 따라 가지를 칠 수 있음
+// 백트래킹으로 풀면 되는 문제인듯
+
+// 가지치기 조건
+// 1. 일을 하고 있다면 일을 받는 재귀 가지치기
+// 2. 현재 남아있는 일 양이 남은 일 수 보다 큰 경우 가지치기
+
+// 그리고 N일이 지났을때, 아직 일이 남아있으면 실패한거임
+// 최대값이라서 돈의 총 합을 대상으로 가지치기는 못 함
+
+// 현재 일 수, 일하고 있는 시간, 총 번 돈
+
+import java.io.*;
+import java.util.*;
+
+class boj_14501 {
+    static int N;
+    static int[][] workList; // [day][0]=T, [day][1]=P
+    static int maxMoney = 0;
+
+    // 백트래킹: nowDay(현재 일수, 0-based), working(남은 작업일수), totalEarn(누적 수익)
+    static void backTracking(int nowDay, int working, int totalEarn) {
+        // 남은 작업이 퇴사일을 넘으면 가지치기
+        if (nowDay + working > N) return;
+
+        // N일에 도달했고 더 할 일 없으면 최대값 갱신
+        if (nowDay == N && working == 0) {
+            if (totalEarn > maxMoney) maxMoney = totalEarn;
+            return;
+        }
+
+        // 아직 N일 전에 도달했고:
+        if (working == 0) {
+            // 오늘 일을 수락하는 경우
+            int workDay = workList[nowDay][0];
+            int workEarn = workList[nowDay][1];
+            backTracking(nowDay + 1, working + workDay - 1, totalEarn + workEarn);
+            // 오늘 일을 거절하는 경우
+            backTracking(nowDay + 1, working, totalEarn);
+        } else {
+            // 일을 진행 중이면 하루 진행
+            backTracking(nowDay + 1, working - 1, totalEarn);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // 로컬 테스트용: 제출 시 주석 처리
+        // System.setIn(new FileInputStream("input.txt"));
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine().trim());
+        workList = new int[N][2];
+
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            workList[i][0] = Integer.parseInt(st.nextToken()); // T_i
+            workList[i][1] = Integer.parseInt(st.nextToken()); // P_i
+        }
+
+        backTracking(0, 0, 0);
+        System.out.println(maxMoney);
+    }
+}
