@@ -38,52 +38,66 @@ public class Main {
             int ans = 3;
 
             while (i < word.length()) {
+                // L 발견시
                 if (word.charAt(i) == 'l') {
                     i += 1;
                     int update_ans = 2;
+                    // 다음 단어가 O인지 확인
                     if (i < word.length() && word.charAt(i) == 'o') {
                         i += 1;
                         update_ans -= 1;
+                        // 다음 단어가 L인지 확인
                         if (i < word.length() && word.charAt(i) == 'l') {
+                            // L이 맞다면 LOL 완성됐으니 결과값 0으로 설정하고 while문 종료
                             ans = 0;
                             break;
+                        // L이 아니면 최소 결과값인지 체크하고 종료
                         } else {
                             i += 1;
                             if (ans > update_ans) {
                                 ans = update_ans;
                             }
                         }
+                    // O가 아니면 다음 문자가 L인지 확인
                     } else if (i < word.length() && word.charAt(i) == 'l') {
+                        // O라면 최소 결과값인지 체크하고 종료
                         update_ans -= 1;
                         if (ans > update_ans) {
                             ans = update_ans;
                         }
+                    // 다음 문자도 L이 아니면 그 다음 문자까지 L인지 확인
                     } else if (i + 1 < word.length() && word.charAt(i + 1) == 'l') {
+                        // L이라면 최소 결과값인지 체크하고 종료
                         i += 1;
                         update_ans -= 1;
                         if (ans > update_ans) {
                             ans = update_ans;
                         }
+                    // 아무것도 아니라면 최소 결과값인지 체크하고 종료
                     } else {
                         i += 1;
                         if (ans > update_ans) {
                             ans = update_ans;
                         }
                     }
+                // O 발견시
                 } else if (word.charAt(i) == 'o') {
                     i += 1;
                     int update_ans = 2;
+                    // 다음 단어가 L인지 확인
                     if (i < word.length() && word.charAt(i) == 'l') {
                         update_ans -= 1;
                         if (ans > update_ans) {
                             ans = update_ans;
                         }
+                    // L이 아니라면 최소 결과값인지 체크하고 종료
                     } else {
                         i += 1;
                         if (ans > update_ans) {
                             ans = update_ans;
                         }
                     }
+                // 아무것도 아니면 다음 인덱스
                 } else {
                     i += 1;
                 }
