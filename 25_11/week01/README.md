@@ -18,18 +18,19 @@ week01/
 # 문제 목록
 
 ## 기업 코테 대비
+<a href='https://www.acmicpc.net/problem/2872' target="_blank">boj_2872 우리집엔 도서관이 있어</a>
 
-[boj_2872 우리집엔 도서관이 있어](https://www.acmicpc.net/problem/2872)
+<a href='https://www.acmicpc.net/problem/2206' target="_blank">boj_2206 벽 부수고 이동하기</a>
 
-[boj_2206 벽 부수고 이동하기](https://www.acmicpc.net/problem/2206)
+<a href='https://www.acmicpc.net/problem/1999' target="_blank">boj_2872 우리집엔 도서관이 있어</a>
 
-[boj_1999 최대 최소](https://www.acmicpc.net/problem/1999)
+
 
 ## B형 대비
 
-[boj_11779 최소비용 구하기 2](https://www.acmicpc.net/problem/11779)
+<a href='https://www.acmicpc.net/problem/11779' target="_blank">boj_11779 최소비용 구하기 2</a>
 
-[boj_3045 이중 연결 리스트](https://www.acmicpc.net/problem/3045)
+<a href='https://www.acmicpc.net/problem/3045' target="_blank">boj_3045 이중 연결 리스트</a>
 
 골드 이상 문제는 설계+구현까지 2시간을 넘기지 않을 것.\
 2시간이 넘으면 바로 구글링/지피티를 통해 어떤 부분이 부족했는지 알아내기.\
