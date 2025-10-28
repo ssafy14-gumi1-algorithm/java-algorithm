@@ -22,7 +22,7 @@ week01/
 
 <a href='https://www.acmicpc.net/problem/2206' target="_blank">boj_2206 벽 부수고 이동하기</a>
 
-<a href='https://www.acmicpc.net/problem/1999' target="_blank">boj_2872 우리집엔 도서관이 있어</a>
+<a href='https://www.acmicpc.net/problem/1999' target="_blank">boj_1999 최대최소</a>
 
 
 
